@@ -87,7 +87,7 @@ if hostname=="DESKTOP-JJSBR8S":
 else:
     DEBUG = True
 
-    ALLOWED_HOSTS = ["ifbox3003company.pythonanywhere.com","ifboxkintaisystem.pythonanywhere.com"]
+    ALLOWED_HOSTS = ["JackShiftIfbox.pythonanywhere.com"]
 
     DATABASES = {
         'default': {
@@ -138,7 +138,7 @@ STATIC_URL = '/static/'
 if hostname=="DESKTOP-JJSBR8S":
     STATIC_ROOT=os.path.join(BASE_DIR,"asset")
 else:
-    STATIC_ROOT = "/home/ifbox3003company/ifBOX/static"
+    STATIC_ROOT = "/home/JackShiftIfbox/ifBOX/static"
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
