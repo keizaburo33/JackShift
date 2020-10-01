@@ -1,0 +1,26 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title>{{cname}}様現場一覧</title>
+    {% endblock %}
+    {% block body%}
+        {%if message%}
+            <p><center>{{message}}</center></p>
+        {%else%}
+        <table>
+            <tr>
+                <th>
+                    現場名
+                </th>
+            </tr>
+        {% for genba in rgenba%}
+            <tr>
+                <td><a href="genbamonthinfo?id={{genba.id}}">{{genba.name}}</a> </td>
+            </tr>
+        {%endfor%}
+        </table>
+        {%endif%}
+    <a href="/customer">会社一覧に戻る</a>
+    {% endblock %}
+

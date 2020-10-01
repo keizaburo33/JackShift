@@ -1,0 +1,19 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title>管理者専用ログイン</title>
+
+    {% endblock %}
+    {% block body%}
+ログインしてください
+<font color="red">{{errormessage}}</font>
+    <form action="/administrator" method="post">
+        {% csrf_token %}
+        <div class="loginform">
+        <input type="text" name="ID" placeholder="LoginId">
+        <input type="password" name="pass1" placeholder="Password1">
+        <input type="submit" value="ログイン" class="button">
+        </div>
+    </form>
+    {% endblock %}

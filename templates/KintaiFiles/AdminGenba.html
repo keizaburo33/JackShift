@@ -1,0 +1,25 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title>現場管理</title>
+    {% endblock %}
+    {% block body%}
+    <a href="/genbakanri">稼働中現場登録・削除</a><br>
+    <h>今月稼働状況</h>
+<table>
+    <tr>
+        <th>現場名</th>
+    </tr>
+
+    {% for site in runninggenba%}
+    <tr>
+        <td>
+        <a href="/genbamonthinfo?id={{site.id}}">{{site.name}}</a>
+        </td>
+    </tr>
+    {% endfor%}
+</table>
+    <a href="/administrator">管理画面へ戻る</a>
+
+    {% endblock %}

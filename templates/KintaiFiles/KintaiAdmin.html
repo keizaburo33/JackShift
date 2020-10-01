@@ -1,0 +1,16 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title>管理ページ</title>
+    {% endblock %}
+
+    {% block body%}
+<div class="admin-menu-area">
+    <div class="menu1 test"><a href="/attendancetoday" class="btn-square">本日<br>出退勤情報</a></div>
+    <div class="menu2"><a href="/employee" class="btn-square">従業員<br>管理・編集</a></div>
+    <div class="menu3"><a href="/genba" class="btn-square">現場別<br>管理・編集</a></div>
+    <div class="menu4"><a href="/customer" class="btn-square">お客様<br>リスト</a></div>
+    <div class="menu5"><a href="/admininfo" class="btn-square">管理者<br>情報変更</a></div>
+</div>
+    {% endblock %}

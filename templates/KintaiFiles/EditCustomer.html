@@ -1,0 +1,16 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title>お客様情報編集</title>
+    {% endblock %}
+    {% block body%}
+<form action="/customeredit" method="post">
+            {% csrf_token %}
+    お客様名:<input type="text" name="name" value="{{customer.compname}}">
+    <input type="submit" value="編集">
+    <input type="hidden" name="id" value="{{customer.primkey}}">
+</form>
+<a href="/customer">お客様一覧に戻る</a>
+    {% endblock %}
+

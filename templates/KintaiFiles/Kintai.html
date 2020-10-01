@@ -1,0 +1,42 @@
+{% extends "ifbox/kintai_common.html"%}
+{% block body %}
+{{empuser.employeename}}さん<br>
+<font color="red">{{message}}</font>
+{% if empuser.jobstatus%}
+現場名:『{{site}}』に出勤中
+<form action="/kintai" method="post">
+    {% csrf_token %}
+    <input type="submit" value="退勤送信"  class="btn-gradient-simple2">
+    <input type="hidden" name="status" value="tk">
+    <input type="hidden" name="dakokutype" value="teiji">
+</form>
+<br>
+<form action="/kintai" method="post">
+    {% csrf_token %}
+    <input type="submit" value="時間外退勤送信({{nowtime}})"  class="btn-gradient-simple3">
+    <input type="hidden" name="status" value="tk">
+    <input type="hidden" name="dakokutype" value="jikangai">
+</form>
+
+<p class="alertshukkin">※誤って出勤ボタンを押してしまった場合は「出勤状況確認」から削除をして下さい。</p>
+{% else %}
+<form action="/kintai" method="post">
+    {% csrf_token %}
+    <div class="select-wrap">
+    <select name="genbaid">
+    {% for site in genba%}
+        {%ifequal site.primkey empuser.lastgenba%}
+        <option value="{{site.primkey}}" selected>{{site.genbaname}}</option>
+        {%else%}
+        <option value="{{site.primkey}}">{{site.genbaname}}</option>
+        {%endifequal%}
+    {%endfor %}
+    </select>
+    </div>
+    <input type="hidden" name="status" value="sk">
+    <button type="submit" class="btn-gradient-simple">出勤送信</button>
+</form>
+{% endif %}
+<a href="/empthismonth">出勤状況確認</a>
+<a href="/emppassedit">パスワード変更</a>
+{% endblock %}

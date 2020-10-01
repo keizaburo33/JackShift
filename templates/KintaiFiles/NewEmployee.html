@@ -1,0 +1,43 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title></title>
+    {% endblock %}
+    {% block body%}
+{{message}}
+{%ifequal registok 1%}
+{{ename}}さんのログイン情報を作成しました。以下の情報をコピーして{{ename}}さんに教えて下さい。<br>
+勤怠管理システムにログインできるようになります。<br>
+    <input id="copyTarget" type="text" value="ID:{{loginid}} PASS:{{password}}" readonly><button onclick="copyToClipboard()">コピーする</button>
+<p>
+    セキュリティ上の問題のため強力なパスワードを自動生成しています。<br>
+    {{ename}}さんのパスワードを変更する場合は<a href="empedit?id={{id}}">こちらから</a>行ってください。
+</p>
+
+    <script>
+        function copyToClipboard() {
+            // コピー対象をJavaScript上で変数として定義する
+            var copyTarget = document.getElementById("copyTarget");
+
+            // コピー対象のテキストを選択する
+            copyTarget.select();
+
+            // 選択しているテキストをクリップボードにコピーする
+            document.execCommand("Copy");
+
+            // コピーをお知らせする
+            alert("コピーしました！ : " + copyTarget.value);
+        }
+    </script>
+{%else%}
+<form action="/newemployee" method="post">
+        {% csrf_token %}
+    従業員名<br><input type="text" name="ename"><br>
+    ログインID<br><input type="text" name="loginid">
+    <input type="submit" value="従業員新規追加" onclick='return confirm("従業員を新規追加します、よろしいですか？")'>
+</form>
+    <font color="red">ログインIDは重複できません。一人一人に対して適切なものを設定してください</font>
+{%endifequal%}
+    <a href="/employee">従業員一覧へ戻る</a>
+    {% endblock %}

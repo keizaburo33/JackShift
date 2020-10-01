@@ -1,0 +1,15 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title>お客様新規追加</title>
+    {% endblock %}
+    {% block body%}
+<font color="red">{{message}}</font>
+<form action="/newcustomer" method="post">
+        {% csrf_token %}
+    <input type="text" name="customername">
+    <input type="submit" value="お客様新規登録">
+</form>
+<a href="/customer">会社一覧に戻る</a>
+    {% endblock %}

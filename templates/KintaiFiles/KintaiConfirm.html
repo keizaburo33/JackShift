@@ -1,0 +1,30 @@
+{% extends "ifbox/kintai_common.html"%}
+{% block body %}
+{% endblock %}
+
+
+{% extends "ifbox/kintai_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title></title>
+    {% endblock %}
+    {% block body%}
+    以下の内容で打刻します。よろしいですか？
+    <div class="test">aiueo</div>
+
+    <table border="1">
+        <tr>
+            <th>現場名</th>
+            <th>時刻</th>
+            <th>打刻タイプ</th>
+
+        </tr>
+        <tr>
+            <td>{{site}}</td>
+            <td>{{nowtime}}</td>
+            <td><font color="skyblue">{{statustype}}</font></td>
+        </tr>
+    </table>
+
+    {% endblock %}

@@ -1,0 +1,12 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title>過去の現場</title>
+    {% endblock %}
+    {% block body%}
+    {% for g in genba%}
+    {{g.genbaname}}<a href="/changeinfo?action=run&p=genbakanri&id={{g.primkey}}" onclick='return confirm("選択された現場を稼働中にします。よろしいですか？")'>稼働中にする</a>
+    {% endfor%}
+    <a href="/genbakanri">現場管理ページへ戻る</a>
+    {% endblock %}

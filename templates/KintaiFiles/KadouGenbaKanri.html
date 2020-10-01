@@ -1,0 +1,40 @@
+{% extends "ifbox/admin_common.html"%}djan
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title>稼働中現場管理</title>
+    {% endblock %}
+    {% block body%}
+    <a href="/sinkigenba">現場新規追加</a>
+    <br>
+<font color="red">{{message}}</font><br>
+    稼働中現場一覧
+<table>
+    <tr>
+        <th>現場名</th>
+        <th>開始</th>
+        <th>終了</th>
+        <th>修正</th>
+        <th>稼働切替</th>
+    </tr>
+        {% for site in genba%}
+    <tr>
+        <form action="/genbakanri" method="post">
+                                {% csrf_token %}
+            <td><p>{{site.genbaname}}<p></td>
+            <td><input type="time" name="stime{{site.primkey}}" value='{{site.start|date:"H:i"}}' step="900"></td>
+            <td><input type="time" name="ttime{{site.primkey}}" value='{{site.end|date:"H:i"}}' step="900"></td>
+            <td>
+                    <input type="submit" value="修正" onclick='return confirm("{{site.genbaname}}の定時時刻を変更します。よろしいですか？");'>
+                    <input type="hidden" name="genbaid" value="{{site.primkey}}">
+            </td>
+            <td><a href="/changeinfo?action=delete&p=genbakanri&id={{site.primkey}}" onclick='return confirm("稼働中の現場から外しますか？（従業員が選択できなくなります)")'>非稼働</a></td>
+
+        </form>
+
+    </tr>
+        {% endfor %}
+</table>
+    <a href="/pastgenba">過去の現場から登録</a>
+    <a href="/genba">現場ページへ戻る</a>
+    {% endblock %}

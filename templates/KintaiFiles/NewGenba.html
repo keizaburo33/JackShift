@@ -1,0 +1,25 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title>現場新規登録</title>
+    {% endblock %}
+    {% block body%}
+<font color="red">{{message}}</font><br>
+<a href="/newcustomer?lastpage=genba">お客様情報新規追加</a>
+<form action="/sinkigenba" method="post">
+        {% csrf_token %}
+    お客様名
+    <select name="compid">
+        <option value="none">--</option>
+        {% for comp in companies%}
+        <option value="{{comp.primkey}}">{{comp.compname}}</option>
+        {% endfor%}
+    </select><br>
+    現場名:<input type="text" name="genbaname"><br>
+    開始時刻:<input type="time" name="stime" step="900"><br>
+    終了時刻:<input type="time" name="ttime" step="900"><br>
+    <input type="submit" value="現場新規登録" onclick='return confirm("この現場を現在稼働中にします、よろしいですか？（従業員が現場を選択できるようになります)");'>
+</form>
+<a href="/genbakanri">稼働中現場へ戻る</a>
+    {% endblock %}

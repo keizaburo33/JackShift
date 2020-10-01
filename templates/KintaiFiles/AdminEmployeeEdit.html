@@ -1,0 +1,26 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title>従業員情報編集</title>
+    {% endblock %}
+    {% block body%}
+{{message}}
+<form action="empedit" method="post">
+            {% csrf_token %}
+    <table>
+        <tr>
+            <th>従業員名</th>
+            <th>ログインID</th>
+            <th>パスワード</th>
+        </tr>
+        <tr>
+            <td><input type="text" value="{{euser.employeename}}" name="name"></td>
+            <td><input type="text" value="{{euser.loginid}}" name="loginid"></td>
+            <td><input type="text" value="{{euser.loginidpass}}" name="pass"></td>
+        </tr>
+    </table>
+    <input type="submit" value="この内容で編集する" onclick='return confirm(この内容で修正します。よろしいですか？)'>
+    <input type="hidden" name="prim" value="{{euser.primkey}}">
+</form>
+    {% endblock %}

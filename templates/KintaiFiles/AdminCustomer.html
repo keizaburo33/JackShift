@@ -1,0 +1,25 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title>お客様情報管理</title>
+    {% endblock %}
+    {% block body%}
+    {{message}}
+    <a href="/newcustomer">お客様新規追加</a>
+<table>
+    <tr>
+        <th>お客様名</th>
+        <th>編集</th>
+        <th>削除</th>
+    </tr>
+        {% for customer in customers%}
+        <tr>
+            <td><a href="/gofcustomer?cid={{customer.primkey}}">{{customer.compname}}</a></td>
+            <td><a href="/customeredit?id={{customer.primkey}}">編集</a> </td>
+            <td><a href="/changeinfo?id={{customer.primkey}}&action=delcustomer">削除</a> </td>
+        </tr>
+        {% endfor %}
+</table>
+    <a href="/administrator">管理画面へ戻る</a>
+    {% endblock %}

@@ -1,0 +1,41 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title>管理者パスワード編集</title>
+    {% endblock %}
+    {% block body%}
+
+<p class="subtitle">管理者ログイン情報変更:</p>
+<font color="red">{{message}}</font>
+<form action="/changeinfo" method="post">
+        {% csrf_token %}
+    ID&emsp;&emsp;&emsp;&nbsp;&nbsp; :<input type="text" name="id" value="{{admin.adminid}}"><br>
+    パスワード:<input type="password" name="pass1"><br>
+    確認 &emsp; &emsp; :<input type="password" name="pass2"><br>
+<br>
+    <input type="submit" value="情報変更" onclick='return confirm("情報を変更します。よろしいですか？");'>
+    <input type="hidden" name="action" value="admininfochange">
+</form>
+<p class="warn">※管理者ページは大切な情報が含まれています。推察されにくいIDとパスワードを設定してください</p>
+<br>
+<p class="subtitle">従業員ログイン権限：</p>
+<form action="/changeinfo" method="post">
+        {% csrf_token %}
+    従業員のログイン時にパスワードを使用<br>
+    <select name="uselogin">
+        {% if admin.uselogin%}
+        <option value="1" selected>する</option>
+        <option value="2">しない</option>
+        {%else%}
+        <option value="1">する</option>
+        <option value="2" selected>しない</option>
+        {%endif%}
+    </select>
+    <input type="submit" value="変更" onclick='return confirm("情報を変更します。よろしいですか？");'>
+    <input type="hidden" name="action" value="usepass">
+</form>
+<br>
+    <a href="/administrator">トップへ戻る</a>
+
+    {% endblock %}

@@ -1,0 +1,26 @@
+{% extends "ifbox/admin_common.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\kintai.css"%}>
+    <title></title>
+    {% endblock %}
+    {% block body%}
+    <p>{{genba}}{{day}}日稼働詳細</p>
+    <table>
+        <tr>
+            <th>従業員名</th>
+            <th>出勤</th>
+            <th>退勤</th>
+            <th>残業</th>
+        </tr>
+        {% for i in runinfo%}
+        <tr>
+            <td>{{i.employeeofrun.employeename}}</td>
+            <td>{{i.attendancetime|date:"H:i"}}</td>
+            <td>{{i.leavetime|date:"H:i"}}</td>
+            <td>{{i.zangyostr}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="genbamonthinfo?id={{genbaid}}">{{genba}}稼働一覧に戻る</a>
+    {% endblock %}
