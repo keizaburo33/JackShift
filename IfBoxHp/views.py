@@ -255,6 +255,7 @@ class Employees(TemplateView):
     template_name = "Employee/EmpCalendar.html"
     def get(self, request, *args, **kwargs):
         context=super(Employees,self).get_context_data(**kwargs)
+        Employee.objects.create(name="田中",loginid="aaaa",password="1234")
         if not EmpLoginCheck(request):
             return redirect("/emplogin")
         userid=request.session["empuserid"]
