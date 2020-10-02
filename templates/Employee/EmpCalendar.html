@@ -1,0 +1,74 @@
+{% extends "Common/EmpCommon.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\jack.css"%}>
+    <link rel = "stylesheet" href={%static "js\jack.js"%}>
+    <title></title>
+    {% endblock %}
+    {% block body%}
+<script>
+    function alertnum(id,color){
+        var selectedcolor="skyblue";
+        var elem=document.getElementById(id);
+        var nowcolor=elem.style.backgroundColor;
+        if (nowcolor!=selectedcolor){
+            elem.style.backgroundColor=selectedcolor;
+        }else{
+            elem.style.backgroundColor=color;
+        }
+        name="day"+id;
+        p=document.form2.elements[name];
+        if(p.value==0){
+        p.value=1;
+        }else{
+        p.value=0
+        }
+    }
+</script>
+{{request.session.empusername}}さん
+<div class="calender">
+        <form name="form2" action="/empshift" method="post">
+                {% csrf_token %}
+            <table border="1" >
+                <tr>
+                    <td>月</td>
+                    <td>火</td>
+                    <td>水</td>
+                    <td>木</td>
+                    <td>金</td>
+                    <td><font color="blue">土</font></td>
+                    <td><font color="red">日</font></td>
+                </tr>
+                {%for days in allday%}
+                <tr>
+                {%for day in days%}
+                    {%if day.exist%}
+                        {%if day.before%}
+                            <td style="background-color:darkgray;  border:1px solid #d3d3d3; ">{{day.value}}</td>
+                        {%else%}
+                            {%if day.added%}
+                                <td onclick='alertnum({{day.value}},"orange")' id="{{day.value}}" style="background-color:orange;">{{day.value}}</td>
+                            {%else%}
+                                <td onclick='alertnum({{day.value}},"white")' id="{{day.value}}" style="background-color:white;">{{day.value}}</td>
+                            {%endif%}
+                        {%endif%}
+                        <input type="hidden" id="day{{day.value}}" name="day{{day.value}}" value="0">
+                    {%else%}
+                    <td style="background-color:black;  border:1px solid #d3d3d3; ">{{day.value}}</td>
+                    {%endif%}
+                {%endfor%}
+                </tr>
+                {%endfor%}
+            </table>
+            <input type="hidden" name="lastday" value="{{lastday}}">
+            <input type="submit" value="シフト編集">
+                        <input type="hidden" name="x" value="{{x}}">
+
+        </form>
+</div>
+<a href="/emplogout">ログアウト</a>
+
+
+    <span class="minutebutton"><p>15</p></span>
+    {% endblock %}
+

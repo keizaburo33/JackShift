@@ -1,0 +1,96 @@
+{% extends "Common/EmpCommon.html"%}
+    {% block header%}
+    {% load static%}
+    <link rel = "stylesheet" href={%static "css\jack.css"%}>
+    <link rel = "stylesheet" href={%static "js\jack.js"%}>
+    <title>シフト編集</title>
+    {% endblock %}
+    {% block body%}
+<div class="shifthead">
+    <div class="days">
+        {% for day in days%}
+        <p>{{day}}&nbsp;</p>
+        {% endfor%}
+    </div>
+    <br>
+    <p id="shifttime" class="shifttime"></p>
+</div>
+<div class="edittime">
+    <div class="selecthour">
+                <span class="hourbutton" onclick='changemin("ath","10")' id="ath10" style="background:skyblue;">10</span>
+        {% for i in beforeh%}
+                <span class="hourbutton" onclick='changemin("ath","{{i}}")' id="ath{{i}}" >{{i}}</span>
+        {% endfor%}
+    </div>
+    <div class="selecthour">
+        {% for i in afterh%}
+                <span class="hourbutton" onclick='changemin("ath","{{i}}")' id="ath{{i}}" >{{i}}</span>
+        {% endfor%}
+    </div>
+
+    <div class="selectminute">
+        <span class="minutebutton" onclick='changemin("atm","00")' id="atm00" style="background:skyblue;">00</span>
+        <span class="minutebutton" onclick='changemin("atm","15")' id="atm15">15</span>
+        <span class="minutebutton" onclick='changemin("atm","30")' id="atm30">30</span>
+        <span class="minutebutton" onclick='changemin("atm","45")' id="atm45">45</span>
+
+    </div>
+
+    <div class="selecthour">
+                <span class="hourbutton2" onclick='changemin("leh","10")' id="leh10" style="background:orange;">10</span>
+        {% for i in beforeh%}
+                <span class="hourbutton2" onclick='changemin("leh","{{i}}")' id="leh{{i}}" >{{i}}</span>
+        {% endfor%}
+    </div>
+        <div class="selecthour">
+        {% for i in afterh%}
+                <span class="hourbutton2" onclick='changemin("leh","{{i}}")' id="leh{{i}}" >{{i}}</span>
+        {% endfor%}
+    </div>
+
+    <div class="selectminute">
+            <span class="minutebutton2" onclick='changemin("lem","00")' id="lem00" style="background:orange;">00</span>
+            <span class="minutebutton2" onclick='changemin("lem","15")' id="lem15">15</span>
+            <span class="minutebutton2" onclick='changemin("lem","30")' id="lem30">30</span>
+            <span class="minutebutton2" onclick='changemin("lem","45")' id="lem45">45</span>
+
+    </div>
+                <input type="hidden" id="atm" value="00">
+                <input type="hidden" id="leh" value="10">
+                <input type="hidden" id="lem" value="00">
+                <input type="hidden" id="ath" value="10">
+</div>
+<a href="/empshift">戻る</a>
+<script>
+    function changemin(st,min){
+        var elem=document.getElementById(st);
+        elem.value=min;
+        if(st=="ath" || st=="leh"){
+          var x=["10","11","12","13","14","15","16","17","18","19","20","21","22","23"];
+        }else{
+          var x=["00","15","30","45"];
+        }
+        x.forEach(function(item){
+            var id=st+item;
+            var e=document.getElementById(id);
+            e.style.backgroundColor="white";
+        }
+        )
+        if(st=="ath" || st=="atm"){
+            document.getElementById(st+min).style.backgroundColor="skyblue";
+        }else{
+            document.getElementById(st+min).style.backgroundColor="orange";
+        }
+
+        var h=document.getElementById("ath").value;
+        var m=document.getElementById("atm").value;
+        var hh=document.getElementById("leh").value;
+        var mm=document.getElementById("lem").value;
+
+        document.getElementById("shifttime").innerHTML=h+":"+m+"～"+hh+":"+mm;
+
+        }
+
+</script>
+    {% endblock %}
+

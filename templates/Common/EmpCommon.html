@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+        {% load static%}
+<!--    <link rel="icon" type="image/png" href="{%static "img/sky-logo.png"%}">-->
+<!--    <link rel="apple-touch-icon" href="{%static "img/sky-logo.png"%}" sizes="180x180">-->
+<!--    <link rel="icon" type="image/png" href="{%static "img/sky-logo.png"%}" >-->
+    <link rel = "stylesheet" href={%static "css\jack.css"%}>
+    {% block header%}
+      {% endblock %}
+
+</head>
+<body>
+<!--        <div class="admin-top">-->
+<!--            <div class="logo">-->
+<!--               <img height="200px" src="{%static "img/sky-logo.png"%}" >-->
+<!--            </div>-->
+<!--            <div class="side1"><p><a href="/administrator" >管理画面トップ</a></p></div>-->
+<!--                <div class="side2">-->
+<!--                    <p>-->
+<!--                {%if request.session.AdminUser%}-->
+<!--                <a href="/changeinfo?action=logout" onclick='return confirm("ログアウトします。よろしいですか？");'>ログアウト</a>-->
+<!--                {%else%}-->
+<!--                <a href="/administrator">ログイン</a>-->
+<!--                    </p>-->
+<!--                {%endif%}-->
+<!--                </div>-->
+<!--        </div>-->
+            {% block body %}
+              {% endblock %}
+</body>
+</html>
