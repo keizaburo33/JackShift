@@ -3,15 +3,42 @@
     {% load static%}
     <link rel = "stylesheet" href={%static "css\jack.css"%}>
     <link rel = "stylesheet" href={%static "js\jack.js"%}>
-    <title></title>
+    <title>従業員ログイン</title>
+<!--    <script>-->
+<!--        window.onload=function(){-->
+<!--        }-->
+<!--    </script>-->
     {% endblock %}
     {% block body%}
 {{message}}
 <form action="/emplogin" method="post">
         {% csrf_token %}
-    <input type="text" name="loginid">
-    <input type="password" name="password">
-    <input type="submit" value="ログイン">
+    <input type="text" name="loginid" id="loginid">
+    <input type="password" name="password" id="password">
+    <input type="submit" value="ログイン" onclick="confirmcheck()">
 </form>
+
+<script>
+        var loginid=localStorage.getItem("emploginid");
+        var password=localStorage.getItem("emppassword");
+        document.getElementById("loginid").value=loginid;
+        document.getElementById("password").value=password;
+
+
+        function confirmcheck(){
+            var id=document.getElementById("loginid").value;
+            var password=document.getElementById("password").value;
+            var loginid=localStorage.getItem("emploginid");
+            var localpassword=localStorage.getItem("emppassword");
+            if (!(id==loginid && password==localpassword)){
+                var result=window.confirm("IDとパスワードを保存しますか？");
+                if(result){
+                    localStorage.setItem("emploginid",id);
+                    localStorage.setItem("emppassword",password);
+                }
+            }
+            }
+
+</script>
     {% endblock %}
 
